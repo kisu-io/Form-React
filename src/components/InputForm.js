@@ -5,22 +5,38 @@ import {Card, Form, Button, Container} from 'react-bootstrap';
 import DatePicker from 'react-datepicker';
 
 const InputForm = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    const validateEmail = (email) => {
+      let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+      return regex.test(email) ? undefined : alert('This email is not valid!');
+    };
+    validateEmail(email);
+    return alert('Successfully submit your information');
+  };
+
   const [startDate, setStartDate] = useState(new Date());
+
   const [formData, setFormData] = useState({
     name: '',
     age: '',
+    date: new Date(),
+    gender: '',
     email: '',
     phone: '',
     about: '',
   });
-  const {name, age, email, phone, about} = formData;
+  const {name, age, date, gender, email, phone, about} = formData;
 
   const onChange = (e) => setFormData({...formData, [e.target.name]: e.target.value});
+
+  console.log(formData);
 
   return (
     <Card>
       <Container>
-        <Form>
+        <Form onSubmit={handleSubmit}>
           <Form.Group className="mb-3" controlId="formBasicName">
             <Form.Label>Name</Form.Label>
             <Form.Control
@@ -51,15 +67,38 @@ const InputForm = () => {
             <DatePicker
               className="mb-3"
               selected={startDate}
+              name="date"
+              value={date}
               onChange={(date) => setStartDate(date)}
             />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Label>Gender</Form.Label>
-            <Form.Check type="checkbox" label="Make" />
-            <Form.Check type="checkbox" label="Female" />
-            <Form.Check type="checkbox" label="Other" />
+            <Form.Check
+              type="radio"
+              label="Male"
+              id="male"
+              name="gender"
+              value={gender}
+              onChange={onChange}
+            />
+            <Form.Check
+              type="radio"
+              label="Female"
+              id="female"
+              name="gender"
+              value={gender}
+              onChange={onChange}
+            />
+            <Form.Check
+              type="radio"
+              label="Other"
+              id="other"
+              name="gender"
+              value={gender}
+              onChange={onChange}
+            />
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="formBasicEmail">
