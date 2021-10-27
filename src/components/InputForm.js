@@ -80,7 +80,7 @@ const InputForm = () => {
               label="Male"
               id="male"
               name="gender"
-              value={gender}
+              value={'male'}
               onChange={onChange}
             />
             <Form.Check
@@ -88,7 +88,7 @@ const InputForm = () => {
               label="Female"
               id="female"
               name="gender"
-              value={gender}
+              value={'female'}
               onChange={onChange}
             />
             <Form.Check
@@ -96,7 +96,7 @@ const InputForm = () => {
               label="Other"
               id="other"
               name="gender"
-              value={gender}
+              value={'other'}
               onChange={onChange}
             />
           </Form.Group>
